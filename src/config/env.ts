@@ -17,7 +17,6 @@ export const config = {
     username: getEnvVar("POSTGRES_USERNAME"),
     password: getEnvVar("POSTGRES_PASSWORD"),
     host: getEnvVar("POSTGRES_HOST"),
-    port: parseInt(process.env.POSTGRES_PORT || "5432", 10),
     database: getEnvVar("POSTGRES_DATABASE"),
   },
   server: {
