@@ -18,14 +18,10 @@ The database credentials must be passed as:
 
 1. Either environment variables
 ```bash
-# PostgreSQL Database Connection String
-export POSTGRES_URL=your_connection_string
-
-# PostgreSQL Database Configuration if POSTGRES_URL is not provided
+# PostgreSQL Database Configuration
 export POSTGRES_USERNAME=your_username
 export POSTGRES_PASSWORD=your_password
 export POSTGRES_HOST=localhost
-export POSTGRES_PORT=5432 # this is the default
 export POSTGRES_DATABASE=your_database
 
 # HTTP Server Configuration
