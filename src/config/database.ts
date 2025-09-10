@@ -1,10 +1,9 @@
 import pg from "pg";
 import { config } from "./env.js";
 
-const c = config.postgres;
+const { username, password, host, port, database } = config.postgres;
 
-export const databaseUrl = c.connectionString
-    ?? `postgresql://${encodeURIComponent(c.username)}:${encodeURIComponent(c.password)}@${c.host}:${c.port}/${c.database}?sslmode=require`;
+export const databaseUrl = `postgresql://${encodeURIComponent(username)}:${encodeURIComponent(password)}@${host}:${port}/${database}?sslmode=require`;
 
 export const resourceBaseUrl = new URL(databaseUrl);
 resourceBaseUrl.protocol = "postgres:";
