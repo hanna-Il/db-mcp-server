@@ -33,9 +33,3 @@ constants.py
 #pyproject.toml
 uv.lock
 *.py
-
-# IDE & merge artifacts
-.idea/
-*.orig
-*.rej
-.DS_Store
