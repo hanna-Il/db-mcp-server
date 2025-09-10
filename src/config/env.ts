@@ -12,12 +12,20 @@ export function getEnvVar(name: string): string {
   return value;
 }
 
+function getOptionalEnvVar(name: string): string | undefined {
+  const value = process.env[name];
+  return typeof value === "string" && value.length > 0 ? value : undefined;
+}
+
 export const config = {
   postgres: {
-    username: getEnvVar("POSTGRES_USERNAME"),
-    password: getEnvVar("POSTGRES_PASSWORD"),
-    host: getEnvVar("POSTGRES_HOST"),
-    database: getEnvVar("POSTGRES_DATABASE"),
+    // If POSTGRES_URL is provided, it takes precedence and individual fields may be omitted
+    url: getOptionalEnvVar("POSTGRES_URL"),
+    username: getOptionalEnvVar("POSTGRES_USERNAME"),
+    password: getOptionalEnvVar("POSTGRES_PASSWORD"),
+    host: getOptionalEnvVar("POSTGRES_HOST"),
+    database: getOptionalEnvVar("POSTGRES_DATABASE"),
+    port: parseInt(process.env.POSTGRES_PORT || "5432", 10),
   },
   server: {
     port: parseInt(process.env.PORT || "3000", 10),

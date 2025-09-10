@@ -19,10 +19,14 @@ The database credentials must be passed as:
 1. Either environment variables
 ```bash
 # PostgreSQL Database Configuration
+# Option A: Provide individual fields
 export POSTGRES_USERNAME=your_username
 export POSTGRES_PASSWORD=your_password
 export POSTGRES_HOST=localhost
+export POSTGRES_PORT=5432 # optional, defaults to 5432
 export POSTGRES_DATABASE=your_database
+# Option B: Provide a full URL (takes precedence if set)
+# export POSTGRES_URL="postgresql://user:pass@host:5432/dbname?sslmode=require"
 
 # HTTP Server Configuration
 # Following are the default values
@@ -44,10 +48,14 @@ create a `.env` file (the package uses `dotenv` package)
 ```bash
 # .env.example
 # PostgreSQL Database Configuration
+# Option A: Individual fields
 POSTGRES_USERNAME=your_username
 POSTGRES_PASSWORD=your_password
 POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
 POSTGRES_DATABASE=your_database
+# Option B: Full URL (takes precedence)
+# POSTGRES_URL=postgresql://user:pass@host:5432/dbname?sslmode=require
 
 # HTTP Server Configuration
 PORT=3000
@@ -165,6 +173,10 @@ MCP Resource:
 ![MCP Resource in MCP Inspector](images/http_resource.png)
 
 
+## Install the GitHub App
+
+If you are installing the companion GitHub App for repository integrations, we strongly recommend granting access only to the specific repositories you plan to use, rather than selecting "All repositories". Granting organization-wide access can lead to a large number of automated pull requests across your organization’s repositories.
+
 ## Configuration
 
 ### Environment Variables
@@ -173,10 +185,12 @@ You have to specify these inside the .env file.
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `POSTGRES_USERNAME` | PostgreSQL username | - | Yes |
-| `POSTGRES_PASSWORD` | PostgreSQL password | - | Yes |
-| `POSTGRES_HOST` | PostgreSQL host | - | Yes |
-| `POSTGRES_DATABASE` | PostgreSQL database name | - | Yes |
+| `POSTGRES_URL` | Full PostgreSQL connection URL (takes precedence over individual fields if set) | - | No |
+| `POSTGRES_USERNAME` | PostgreSQL username | - | Yes (if POSTGRES_URL not set) |
+| `POSTGRES_PASSWORD` | PostgreSQL password | - | Yes (if POSTGRES_URL not set) |
+| `POSTGRES_HOST` | PostgreSQL host | - | Yes (if POSTGRES_URL not set) |
+| `POSTGRES_PORT` | PostgreSQL port | 5432 | No |
+| `POSTGRES_DATABASE` | PostgreSQL database name | - | Yes (if POSTGRES_URL not set) |
 | `PORT` | HTTP server port | 3000 | No |
 | `HOST` | HTTP server host | 0.0.0.0 | No |
 | `CORS_ORIGIN` | Allowed CORS origins (comma-separated) | localhost:8080,localhost:3000 | No |
